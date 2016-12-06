@@ -1,0 +1,556 @@
+Sub unhide()
+
+Rows("1:100").EntireRow.Hidden = False
+Range("A4:g10000").Clear
+Range("h35:p100").Clear
+
+End Sub
+
+
+Sub MANAGEplms()
+
+Range("H37:p10000").Clear
+ThisWorkbook.Styles("Normal").Font.Name = "Cambria"
+ThisWorkbook.Styles("Normal").Font.Size = "10"
+Rows("1:100").EntireRow.Hidden = False
+
+nplms = 0
+rplms = 0
+cplms = 0
+
+If InStr(Range("i11"), "N930T") > 0 Then
+Range("i8").Value = "Grace [N930T]"
+
+End If
+If InStr(Range("i11"), "G550T") > 0 Then
+Range("i8").Value = "On5 [G550T]"
+
+End If
+
+If InStr(Range("i11"), "G870T") > 0 Then
+Range("i8").Value = "K-active [G870T]"
+
+End If
+
+
+If InStr(Range("i11"), "G920T") > 0 Then
+Range("i8").Value = "Zero_F [G920T]"
+
+End If
+
+If InStr(Range("i11").Value, "N910T") > 0 Then
+Range("i8").Value = "TR [N910T]"
+
+End If
+
+If InStr(Range("i11").Value, "N920T") > 0 Then
+Range("i8").Value = "Noble [N920T]"
+
+End If
+
+If InStr(Range("i11").Value, "G935T") > 0 Then
+Range("i8").Value = "Hero2 [G935T]"
+
+End If
+
+If InStr(Range("i11").Value, "G930T") > 0 Then
+Range("i8").Value = "Hero [G930T]"
+
+End If
+
+If InStr(Range("i11").Value, "G900T") > 0 Then
+Range("i8").Value = "K [G900T]"
+
+End If
+
+If InStr(Range("i11").Value, "G900T3") > 0 Then
+Range("i8").Value = "K3 [G900T3]"
+
+End If
+
+If InStr(Range("i11").Value, "J120T") > 0 Then
+Range("i8").Value = "J1 [J120T]"
+
+End If
+
+If InStr(Range("i11").Value, "J320T") > 0 Then
+Range("i8").Value = "J3 [J320T]"
+End If
+
+If InStr(Range("h2").Value, "Driving") > 0 Then
+
+Cells(3, 8) = "Hello all," & vbCrLf & "We, Seattle/NJ BT-IMS team performed " & Cells(8, 9) & " " & Cells(9, 9) & " Sanity and Driving tests."
+Else:
+Cells(3, 8) = "Hello all," & vbCrLf & vbCrLf & "We, Seattle BT-IMS team performed " & Cells(8, 9) & " " & Cells(9, 9) & " VoLTE full tests."
+Rows("24:30").EntireRow.Hidden = True
+
+End If
+
+
+
+
+endpt = Range("A10000").End(xlUp).Row
+
+        plmcStart = 36
+        plmc = plmcStart
+        writeTitle = 0
+        For n = 4 To endpt
+            xx = Cells(n, 4)
+            If Application.WorksheetFunction.IsNumber(Cells(n, 2)) Then
+                
+                If Int(Cells(n, 2)) > Int(Now) Then
+                    If InStr(xx, "SEATTLE") > 0 Then
+                    nplms = nplms + 1
+                    
+                 If writeTitle = 0 Then
+                         
+                        Range(Cells(plmc, 8), Cells(plmc, 10)).Select
+                        
+                        Selection.Merge
+                        Selection.Value = "PLMs Registered in Seattle"
+                        Selection.Font.Bold = True
+                        Selection.Font.Size = "12"
+                        
+                        
+                        plmc = plmc + 1
+                        Range("r2 :z2").Copy
+                        
+                        Range(Cells(plmc, 8), Cells(plmc, 10)).PasteSpecial
+                        
+                        
+                        plmc = plmc + 1
+                  writeTitle = 1
+                  End If
+                  
+                        Cells(plmc, 8) = Cells(n, 1)
+                        Cells(plmc, 8).Font.Underline = xlUnderlineStyleSingle
+                        Cells(plmc, 8).Font.Color = vbBlue
+                        Cells(plmc, 8).HorizontalAlignment = xlCenter
+                        Cells(plmc, 8).VerticalAlignment = xlCenter
+                        Cells(plmc, 8).Borders.LineStyle = xlContinuous
+                        
+                        
+                        
+                         Cells(plmc, 9) = Cells(n, 5)
+                         Cells(plmc, 9).HorizontalAlignment = xlCenter
+                         Cells(plmc, 9).VerticalAlignment = xlCenter
+                         Cells(plmc, 9).Borders.LineStyle = xlContinuous
+                         
+                        '  Cells(plmc, 10) = Cells(n, 4)
+                         ' Cells(plmc, 10).VerticalAlignment = xlCenter
+                          'plmc = plmc + 1
+                          
+                            Range(Cells(plmc, 10), Cells(plmc, 16)).Select
+                            Selection.Merge
+                            Selection.Borders.LineStyle = xlContinuous
+                             Selection.VerticalAlignment = xlCenter
+                             
+                            Cells(n, 4).Select
+                            Selection.Copy
+                              
+                            
+                            Range(Cells(plmc, 10), Cells(plmc, 16)).Select
+                            ActiveSheet.Paste
+                            
+                            plmc = plmc + 1
+                      
+                        
+                          
+                    End If
+                    
+                                       
+                End If
+                
+             End If
+               
+            
+        Next n
+        If nplmps > 0 Then
+        plmc = plmc + 1
+        End If
+        
+        '======================================================================================================
+     '===============================================================================================================================
+         
+         
+        writeTitle = 0
+        For n = 4 To endpt
+            xx = Cells(n, 4)
+            If Application.WorksheetFunction.IsNumber(Cells(n, 2)) Then
+                
+                If Int(Cells(n, 2)) > Int(Now) Then
+                    If InStr(xx, "NJ") > 0 Then
+                    nplms = nplms + 1
+                    
+                 If writeTitle = 0 Then
+                         
+                        Range(Cells(plmc, 8), Cells(plmc, 10)).Select
+                        
+                        Selection.Merge
+                        Selection.Value = "PLMs Registered in NJ"
+                        Selection.Font.Bold = True
+                        Selection.Font.Size = "12"
+                        
+                        
+                        plmc = plmc + 1
+                        Range("r2 :z2").Copy
+                        
+                        Range(Cells(plmc, 8), Cells(plmc, 10)).PasteSpecial
+                        
+                        
+                        plmc = plmc + 1
+                  writeTitle = 1
+                  End If
+                  
+                        Cells(plmc, 8) = Cells(n, 1)
+                        Cells(plmc, 8).Font.Underline = xlUnderlineStyleSingle
+                        Cells(plmc, 8).Font.Color = vbBlue
+                        Cells(plmc, 8).HorizontalAlignment = xlCenter
+                        Cells(plmc, 8).VerticalAlignment = xlCenter
+                        Cells(plmc, 8).Borders.LineStyle = xlContinuous
+                        
+                        
+                        
+                         Cells(plmc, 9) = Cells(n, 5)
+                         Cells(plmc, 9).HorizontalAlignment = xlCenter
+                         Cells(plmc, 9).VerticalAlignment = xlCenter
+                         Cells(plmc, 9).Borders.LineStyle = xlContinuous
+                         
+                        '  Cells(plmc, 10) = Cells(n, 4)
+                         ' Cells(plmc, 10).VerticalAlignment = xlCenter
+                          'plmc = plmc + 1
+                          
+                            Range(Cells(plmc, 10), Cells(plmc, 16)).Select
+                            Selection.Merge
+                            Selection.Borders.LineStyle = xlContinuous
+                           ' Selection.HorizontalAlignment = xlCenter
+                        Selection.VerticalAlignment = xlCenter
+                             
+                            Cells(n, 4).Select
+                            Selection.Copy
+                              
+                            
+                            Range(Cells(plmc, 10), Cells(plmc, 16)).Select
+                            ActiveSheet.Paste
+                            
+                            plmc = plmc + 1
+                      
+                        
+                          
+                    End If
+                    
+                                       
+                End If
+                
+             End If
+               
+            
+        Next n
+        If nplmps > 0 Then
+        plmc = plmc + 1
+        End If
+        '=====================================================================
+           
+        
+        
+        writeTitle = 0
+        For n = 4 To endpt
+            xx = Cells(n, 4)
+            If Application.WorksheetFunction.IsNumber(Cells(n, 7)) Then
+                
+                If Int(Cells(n, 7)) > Int(Now) Then
+                    If InStr(xx, "SEATTLE") > 0 Or InStr(xx, "NJ") Then
+                    cplms = cplms + 1
+                 If writeTitle = 0 Then
+                         
+                        Range(Cells(plmc, 8), Cells(plmc, 10)).Select
+                        
+                        Selection.Merge
+                        Selection.Value = "PLMs Closed"
+                        Selection.Font.Bold = True
+                        Selection.Font.Size = "12"
+                        
+                        
+                        plmc = plmc + 1
+                        Range("r2 :z2").Copy
+                        
+                        Range(Cells(plmc, 8), Cells(plmc, 10)).PasteSpecial
+                        
+                        
+                        plmc = plmc + 1
+                  writeTitle = 1
+                  End If
+                  
+                        Cells(plmc, 8) = Cells(n, 1)
+                        Cells(plmc, 8).Font.Underline = xlUnderlineStyleSingle
+                        Cells(plmc, 8).Font.Color = vbBlue
+                        Cells(plmc, 8).HorizontalAlignment = xlCenter
+                        Cells(plmc, 8).VerticalAlignment = xlCenter
+                        Cells(plmc, 8).Borders.LineStyle = xlContinuous
+                        
+                        
+                        
+                         Cells(plmc, 9) = Cells(n, 5)
+                         Cells(plmc, 9).HorizontalAlignment = xlCenter
+                         Cells(plmc, 9).VerticalAlignment = xlCenter
+                         Cells(plmc, 9).Borders.LineStyle = xlContinuous
+                         
+                        '  Cells(plmc, 10) = Cells(n, 4)
+                         ' Cells(plmc, 10).VerticalAlignment = xlCenter
+                          'plmc = plmc + 1
+                          
+                            Range(Cells(plmc, 10), Cells(plmc, 16)).Select
+                            Selection.Merge
+                            Selection.Borders.LineStyle = xlContinuous
+                            Selection.VerticalAlignment = xlCenter
+                             
+                            Cells(n, 4).Select
+                            Selection.Copy
+                              
+                            
+                            Range(Cells(plmc, 10), Cells(plmc, 16)).Select
+                            ActiveSheet.Paste
+                            
+                            plmc = plmc + 1
+                      
+                        
+                          
+                    End If
+                    
+                                       
+                End If
+                
+             End If
+               
+            
+        Next n
+        If cplmps > 0 Then
+        plmc = plmc + 1
+        End If
+    '===============================================================================================================================
+    
+    
+    
+        
+        writeTitle = 0
+        For n = 4 To endpt
+            xx = Cells(n, 4)
+            If Application.WorksheetFunction.IsNumber(Cells(n, 6)) Then
+                
+                If Int(Cells(n, 6)) > Int(Now) Then
+                    If InStr(xx, "SEATTLE") > 0 Then
+                    rplms = rplms + 1
+                 If writeTitle = 0 Then
+                         
+                        Range(Cells(plmc, 8), Cells(plmc, 10)).Select
+                        
+                        Selection.Merge
+                        Selection.Value = "PLMs Rejected"
+                        Selection.Font.Bold = True
+                        Selection.Font.Size = "12"
+                        
+                        
+                        plmc = plmc + 1
+                        Range("r2 :z2").Copy
+                        
+                        Range(Cells(plmc, 8), Cells(plmc, 10)).PasteSpecial
+                        
+                        
+                        plmc = plmc + 1
+                  writeTitle = 1
+                  End If
+                  
+                        Cells(plmc, 8) = Cells(n, 1)
+                        Cells(plmc, 8).Font.Underline = xlUnderlineStyleSingle
+                        Cells(plmc, 8).Font.Color = vbBlue
+                        Cells(plmc, 8).HorizontalAlignment = xlCenter
+                        Cells(plmc, 8).VerticalAlignment = xlCenter
+                        Cells(plmc, 8).Borders.LineStyle = xlContinuous
+                        
+                        
+                        
+                         Cells(plmc, 9) = Cells(n, 5)
+                         Cells(plmc, 9).HorizontalAlignment = xlCenter
+                         Cells(plmc, 9).VerticalAlignment = xlCenter
+                         Cells(plmc, 9).Borders.LineStyle = xlContinuous
+                         
+                        '  Cells(plmc, 10) = Cells(n, 4)
+                         ' Cells(plmc, 10).VerticalAlignment = xlCenter
+                          'plmc = plmc + 1
+                          
+                            Range(Cells(plmc, 10), Cells(plmc, 16)).Select
+                            Selection.Merge
+                            Selection.Borders.LineStyle = xlContinuous
+                            Selection.VerticalAlignment = xlCenter
+                             
+                            Cells(n, 4).Select
+                            Selection.Copy
+                              
+                            
+                            Range(Cells(plmc, 10), Cells(plmc, 16)).Select
+                            ActiveSheet.Paste
+                            
+                            plmc = plmc + 1
+                      
+                        
+                          
+                    End If
+                    
+                                       
+                End If
+                
+             End If
+               
+            
+        Next n
+        
+    '======================================================================================================
+        
+        
+        
+        writeTitle = 0
+        For n = 4 To endpt
+            xx = Cells(n, 4)
+           
+                
+                If InStr(xx, "SEATTLE") > 0 Or InStr(xx, "NJ") > 0 Then
+                    
+                    If InStr(Cells(n, 3), "Open") > 0 Then
+                        If Int(Cells(n, 2)) < Int(Now) Then
+                    
+                    cplms = cplms + 1
+                 If writeTitle = 0 Then
+                         
+                        Range(Cells(plmc, 8), Cells(plmc, 10)).Select
+                        
+                        Selection.Merge
+                        Selection.Value = "Previously raised Open PLMs"
+                        Selection.Font.Bold = True
+                        Selection.Font.Size = "12"
+                        
+                        
+                        plmc = plmc + 1
+                        Range("r2 :z2").Copy
+                        
+                        Range(Cells(plmc, 8), Cells(plmc, 10)).PasteSpecial
+                        
+                        
+                        plmc = plmc + 1
+                  writeTitle = 1
+                  End If
+                  
+                        Cells(plmc, 8) = Cells(n, 1)
+                        Cells(plmc, 8).Font.Underline = xlUnderlineStyleSingle
+                        Cells(plmc, 8).Font.Color = vbBlue
+                        Cells(plmc, 8).HorizontalAlignment = xlCenter
+                        Cells(plmc, 8).VerticalAlignment = xlCenter
+                        Cells(plmc, 8).Borders.LineStyle = xlContinuous
+                        
+                        
+                        
+                         Cells(plmc, 9) = Cells(n, 5)
+                         Cells(plmc, 9).HorizontalAlignment = xlCenter
+                         Cells(plmc, 9).VerticalAlignment = xlCenter
+                         Cells(plmc, 9).Borders.LineStyle = xlContinuous
+                         
+                        '  Cells(plmc, 10) = Cells(n, 4)
+                         ' Cells(plmc, 10).VerticalAlignment = xlCenter
+                          'plmc = plmc + 1
+                          
+                            Range(Cells(plmc, 10), Cells(plmc, 16)).Select
+                            Selection.Merge
+                            Selection.Borders.LineStyle = xlContinuous
+                            Selection.VerticalAlignment = xlCenter
+                             
+                            Cells(n, 4).Select
+                            Selection.Copy
+                              
+                            
+                            Range(Cells(plmc, 10), Cells(plmc, 16)).Select
+                            ActiveSheet.Paste
+                            
+                            plmc = plmc + 1
+                      
+                        
+                          
+                    End If
+                    
+                                       
+                End If
+                
+             End If
+               
+            
+        Next n
+        If cplmps > 0 Then
+        plmc = plmc + 1
+        End If
+    
+        
+        
+        plmc = plmc + 1
+        
+    
+   ' Range(Cells(plmc, 8), Cells(plmc + 3, 10)).Value = Range("s12:u15").Value
+    Range("s12:v15").Copy Destination:=Range(Cells(plmc, 8), Cells(plmc + 3, 11))
+    
+    If nplms = 0 Then
+    Range("h15") = "2. No new issues observed."
+        
+    End If
+    If nplms = 1 Then
+    Range("h15") = "2. 1 new issue observed."
+    
+    End If
+    
+    If nplms > 1 Then
+    Range("h15") = "2. " & nplms & " new issues observed."
+    End If
+    
+    
+    
+    jj = 16
+    For jj = 16 To 21
+    If IsEmpty(Cells(jj, 8)) Then
+    
+    Cells(jj, 8).EntireRow.Hidden = True
+    
+    End If
+    Next jj
+    
+    If Range("I33") = 0 And Range("I34") = 0 Then
+    
+    Range("H14") = "1. Today we performed Sanity and Driving test cases."
+    End If
+    
+    If Range("I34") = 0 And Range("I33") <> 0 Then
+    
+    Range("H14") = "1. Today we performed " & Range("I33").Value & " test cases."
+    
+ 
+    
+    End If
+    
+    If Range("I34") <> 0 And Range("I33") <> 0 Then
+    
+    Range("H14") = "1. Today we performed " & Range("I33").Value & " and " & Range("i34") & " test cases."
+        
+      
+    
+    End If
+    
+    If Range("i33") = 0 Then
+    
+    Range("I30:I34").EntireRow.Hidden = True
+    
+    End If
+    If Range("i34") = 0 Then
+    
+    Range("I34").EntireRow.Hidden = True
+    
+    End If
+    
+    
+    
+End Sub
+
